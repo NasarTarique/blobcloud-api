@@ -1,4 +1,4 @@
-from azure.storage.blob import BlobServiceClient  , BlobClient , __version__
+from azure.storage.blob import BlobServiceClient  , BlobClient , __version__ , ContainerClient
 import os
 
 
@@ -11,12 +11,10 @@ upload_file_path = os.path.join(local_path,local_file_name)
 # Create a container for Azurite for the first run
 print('azure storage version '+__version__+' python quickstart sample')
 blob_service_client = BlobServiceClient.from_connection_string(os.environ.get("AZURE_STORAGE_CONNECTION_STRING"),)
+container_client = blob_service_client.get_container_client(os.environ["STORAGE_CONTAINER"])
 try:
-    blob_client =blob_service_client.get_blob_client(container=os.environ['STORAGE_CONTAINER'],blob=local_file_name)
-    print("\n Uploading to azure storage as blob :\n\t"+local_file_name)
-    with open(upload_file_path,"rb") as data:
-        blob_client.upload_blob(data)
-
-
+    blob_list = container_client.list_blobs()
+    for blob in blob_list:
+        print("\t"+blob.name)
 except Exception as e:
    print(e)
