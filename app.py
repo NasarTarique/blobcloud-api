@@ -3,6 +3,9 @@ from azblob.azureclient import AzureClient
 
 app = Flask(__name__)
 
+
+# Shared Access key for Azure storage file access auth  
+# Presigned url for aws file access auth
 @app.route("/",methods=['GET'])
 def get_file():
     filename = request.args.get('filename')
