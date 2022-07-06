@@ -13,7 +13,7 @@ ACCOUNT_KEY = os.environ.get('ACCOUNT_KEY')
 
 class AzureClient:
     def __init__(self):
-        self.blob_service_client = BlobServiceClient.from_connection_string(CONNECTION_STRING)
+        self.blob_service_client = BlobServiceClient.from_connection_string(os.environ.get("AZURE_STORAGE_CONNECTION_STRING"))
         self.identifiers = {}
         self.get_access_policy_identifiers()
 
@@ -46,9 +46,6 @@ class AzureClient:
     def create_connection_string(self,accountname,accountkey):
         pass
     
-    def check_auth(self):
-        pass
-    
     def createcontainer(self,container):
         container_client = ContainerClient(os.environ.get("AZURE_STORAGE_CONNECTION_STRING"),container_name=container)
         container_client.create_container()
@@ -76,6 +73,6 @@ class AzureClient:
         blob_client.delete_blob()
 
     def listfiles(self):
-        container = ContainerClient.from_connection_string(conn_str=CONNECTION_STRING, container_name=CONTAINER_NAME)
+        container = ContainerClient.from_connection_string(conn_str=os.environ.get("AZURE_STORAGE_CONNECTION_STRING"), container_name=CONTAINER_NAME)
         blob_list = container.list_blobs()
         return blob_list
