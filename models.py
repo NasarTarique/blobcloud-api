@@ -17,7 +17,7 @@ class UserKeys(db.Model):
         self.api_key = self.generate_api_key()
 
     def generate_api_key(self):
-        return secrets.token_urlsafe(40)
+        return secrets.token_urlsafe(50)
 
     def generate_hash(self, val):
         value = bytes(val,'utf-8')
