@@ -5,6 +5,7 @@ Explanation of the Idea : one solution that supports storage and retrieval of fi
  1. AWS
  2. AZURE
  3. PYTHON3
+ 
  Dev Tools and Framework used:
  1. Flask
  2. VS code
